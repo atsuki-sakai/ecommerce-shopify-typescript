@@ -42,5 +42,4 @@ query getAllProducts($first: Int = 250) {
     }
 }
 `
-
 export default getAllProductsQuery

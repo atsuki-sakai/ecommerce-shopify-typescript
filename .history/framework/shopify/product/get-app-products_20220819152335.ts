@@ -1,5 +1,7 @@
-import { normalizeProduct, fetchApi, getAllProductsQuery } from '../utils';
+import getAllProductsQuery from '../utils/queries/get-all-products';
+import { fetchApi } from '../utils';
 import { ProductConnection } from '../shema';
+import { normalizeProduct } from "../utils/normalize"
 import { Product } from '@common/types/product';
 
 

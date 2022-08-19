@@ -35,12 +35,10 @@ edges {
 }
 `
 
-const getAllProductsQuery = `
+export const getAllProductsQuery = `
 query getAllProducts($first: Int = 250) {
     products(first: $first) {
         ${productConnect}
     }
 }
 `
-
-export default getAllProductsQuery
