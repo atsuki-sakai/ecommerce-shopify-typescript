@@ -1,9 +1,10 @@
 import type { AppProps } from 'next/app'
+import { FC} from 'react';
 import { Layout } from '@components/common';
-import "@styles/main.css"
 
 // Layutの型をanyからFCにするとエラーが出るが通る。
-function MyApp({ Component, pageProps }: AppProps ) {
+function MyApp({ Component, pageProps }: AppProps & { Component: { Layout: FC } } ) {
+
 
   return (
     <Layout>
@@ -11,5 +12,6 @@ function MyApp({ Component, pageProps }: AppProps ) {
     </Layout>
   )
 }
+
 
 export default MyApp

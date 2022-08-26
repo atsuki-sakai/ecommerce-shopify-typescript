@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:css": "postcss styles/main.css -o styles/main_browser.css"
+    "build:css": "postcss styles/main.css -o assets/main_browser.css"
   },
   "dependencies": {
     "deepmerge": "^4.2.2",
