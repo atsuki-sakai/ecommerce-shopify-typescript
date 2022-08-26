@@ -5,7 +5,8 @@ type Props = {
     children?: ReactNode | ReactNode[]
 }
 
-const Layout: FC = ({children}: Props) => {
+
+const Layout = ({children}: Props) => {
     return (
         <div className="layout">
             { children }

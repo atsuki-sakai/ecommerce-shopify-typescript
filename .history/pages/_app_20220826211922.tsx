@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app'
 import { FC } from 'react';
 
-const Noop: FC = ({children}: any) => <>{children}</>
+const Noop = ({children}: any) => <>{children}</>
 
 // Layutの型をanyからFCにするとエラーが出るが通る。
 function MyApp({ Component, pageProps }: AppProps & { Component: { Layout: FC } } ) {
