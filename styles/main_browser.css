@@ -508,3 +508,6 @@ video {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
+.fit {
+        min-height: calc(100vh - 88px);
+    }

@@ -8,11 +8,11 @@ type Props = {
 
 const Layout: FC<Props> = ({children}: Props) => {
     return (
-        <div className={style.root}>
-            <main className={style.fit}>
+        <>
+            <main className={style.root}>
                 { children }
             </main>
-        </div>
+        </>
     )
 }
 
