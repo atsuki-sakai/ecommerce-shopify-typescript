@@ -9,7 +9,8 @@ type Props = {
 const Layout: FC<Props> = ({children}: Props) => {
     return (
         <div className={style.root}>
-            <main style={{ color: "var(--primary)" }} className={style.fit}>
+            <main className={style.fit}>
+                <p　className='fit'></p>
                 { children }
             </main>
         </div>
