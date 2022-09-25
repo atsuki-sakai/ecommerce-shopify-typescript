@@ -1,7 +1,7 @@
 
 export interface ProductImage {
     url: string
-    alt?: string
+    altText?: string
 }
 
 export interface Product {

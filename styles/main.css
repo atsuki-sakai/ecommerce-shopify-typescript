@@ -5,6 +5,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* tailwind css 自作スタイル */
+
+body {
+    margin:0;
+}
 
 @layer components {
     .fit {

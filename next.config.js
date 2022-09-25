@@ -8,8 +8,8 @@ const nextConfig = withFrameworkConfig({
     name: "shopify"
   },
   i18n: {
-    locales: ["ja"],
-    defaultLocale: "ja"
+    locales: ["en","ja"],
+    defaultLocale: "en"
   }
 })
 

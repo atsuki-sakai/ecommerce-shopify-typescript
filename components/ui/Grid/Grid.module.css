@@ -1,0 +1,26 @@
+
+
+/* @screen lg{} の中では@apply出来ない。 https://tailwindcss.com/docs/using-with-preprocessors#nesting*/
+
+.root {
+    @apply grid grid-cols-1 gap-0 lg:grid-cols-3 lg:grid-rows-2;
+    & > * {
+        @apply row-span-1 overflow-hidden;
+        @screen lg {
+            height: inherit;
+        }
+    }
+}
+
+.layoutA {
+    /* 1,7,13 */
+    /* 5,11,17 */
+    & > *:nth-child(6n + 1),
+    & > *:nth-child(6n + 5) {
+        @apply text-base lg:col-span-2 row-span-2;
+    }
+}
+
+.layoutB {
+    @apply text-base;
+}

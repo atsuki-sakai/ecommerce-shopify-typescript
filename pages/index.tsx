@@ -2,6 +2,8 @@ import type { InferGetStaticPropsType } from "next"
 import getAllProducts from '@framework/product/get-app-products'
 import { getConfig } from "@framework/api/config"
 import { Layout } from "@components/common"
+import { ProductCard } from "@components/product"
+import { Grid } from "@components/ui"
 
 export async function getStaticProps() {
 
@@ -15,13 +17,20 @@ export async function getStaticProps() {
   }
 }
 
+
 export default function Home({ products }: InferGetStaticPropsType<typeof getStaticProps>) {
+
+  console.log("fetch product count:",products.length);
   return (
-    <div className="">
-      { JSON.stringify(products)}
-      <br/>
-      { products[0].name }
-    </div>
+    <>
+      <Grid layout="A">
+        {
+          products.slice(0,3).map(product =>
+            <ProductCard key={product.id}product={product}/>
+          )
+        }
+      </Grid>
+    </>
   )
 }
 
