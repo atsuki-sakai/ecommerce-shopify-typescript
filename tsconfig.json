@@ -25,6 +25,12 @@
       "@styles/*": ["styles/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/flex.module.csss",
+    "components/ui/Marquee"
+  ],
   "exclude": ["node_modules"]
 }

@@ -1,0 +1,19 @@
+
+.root {
+    @apply flex flex-row md:py-6;
+}
+.link {
+    @apply text-gray-500 leading-6 font-medium transition duration-300 ease-in-out;
+
+    &:hover {
+        @apply text-gray-700;
+    }
+}
+
+.logo {
+    @apply text-2xl font-bold;
+}
+
+.nav {
+    @apply w-full flex justify-around;
+}

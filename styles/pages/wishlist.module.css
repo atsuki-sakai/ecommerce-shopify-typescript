@@ -1,0 +1,8 @@
+
+.root {
+    @apply mt-3 mb-20;
+}
+
+.wrapper {
+    @apply flex flex-col;
+}

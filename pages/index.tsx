@@ -3,7 +3,7 @@ import getAllProducts from '@framework/product/get-app-products'
 import { getConfig } from "@framework/api/config"
 import { Layout } from "@components/common"
 import { ProductCard } from "@components/product"
-import { Grid } from "@components/ui"
+import { Grid, Hero, Marquee } from "@components/ui"
 
 export async function getStaticProps() {
 
@@ -20,16 +20,26 @@ export async function getStaticProps() {
 
 export default function Home({ products }: InferGetStaticPropsType<typeof getStaticProps>) {
 
-  console.log("fetch product count:",products.length);
   return (
     <>
       <Grid layout="A">
         {
           products.slice(0,3).map(product =>
-            <ProductCard key={product.id}product={product}/>
+            <ProductCard key={product.id}product={product} variant={"simple"}/>
           )
         }
       </Grid>
+      <Hero
+        headline="Cookies, ice cream and muffin"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      />
+      <Marquee variant="secondary">
+        {
+          products.slice(0,3).map(product =>
+            <ProductCard key={product.id}product={product} variant={"slim"}/>
+          )
+        }
+      </Marquee>
     </>
   )
 }
