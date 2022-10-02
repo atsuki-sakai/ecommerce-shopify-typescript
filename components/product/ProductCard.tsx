@@ -13,10 +13,11 @@ type Props = {
 export const placeholderImage = "/images/product-image-placeholder.svg"
 
 const ProductCard: FC<Props> = ({product, variant = "simple"}) => {
+
     return (
         <Link 
             href={{
-                pathname: `products/${product.slug}`,
+                pathname: `/products/${product.slug}`,
             }} passHref>
             <a className={style.root}>
                 {

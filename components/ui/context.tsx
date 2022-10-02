@@ -1,6 +1,6 @@
 
 
-import React, { ReactNode, FC, createContext, useContext, useReducer, useEffect, ReactEventHandler } from "react"
+import React, { ReactNode, FC, createContext, useContext, useReducer, useEffect, useMemo } from "react"
 
 interface Props {
     children: ReactNode | ReactNode[]
@@ -55,11 +55,14 @@ export const UIProvider: FC<Props> = ({children}: Props) => {
     const openSideBar = () => dispatch({type: "OPEN_SIDEBAR"})
     const closeSideBar = () => dispatch({type: "CLOSE_SIDEBAR"})
 
-    const  value = {
-        ...state,
-        openSideBar,
-        closeSideBar,
-    }
+    // stateが変更された時だけ再計算した値を返す
+    const value = useMemo(() => {
+        return {
+            ...state,
+            openSideBar,
+            closeSideBar
+        }
+    },[state])
 
     const handle = (e: any) => {
         e.preventDefault();

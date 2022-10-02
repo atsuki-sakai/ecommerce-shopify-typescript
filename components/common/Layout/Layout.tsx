@@ -16,7 +16,7 @@ const Layout: FC<Props> = ({children}: Props) => {
     return (
         <div className={style.root}>
             <NavBar/>
-            <Sidebar 
+            <Sidebar
                 isOpen={ isSideBarOpen }
                 onClose={ closeSideBar }
             >

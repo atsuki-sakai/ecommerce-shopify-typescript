@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const { withFrameworkConfig } = require("./framework/common/config")
+const { projectLocale } = require("./framework/common/locale")
 
 const nextConfig = withFrameworkConfig({
   reactStrictMode: true,
@@ -8,8 +9,8 @@ const nextConfig = withFrameworkConfig({
     name: "shopify"
   },
   i18n: {
-    locales: ["en","ja"],
-    defaultLocale: "en"
+    locales: projectLocale,
+    defaultLocale: projectLocale[0]
   }
 })
 

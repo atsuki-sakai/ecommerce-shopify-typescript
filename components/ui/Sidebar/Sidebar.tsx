@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect } from 'react'
+import React, { FC, ReactNode, useEffect, useRef } from 'react'
 
 interface Props {
     children: ReactNode | ReactNode[]
@@ -8,10 +8,19 @@ interface Props {
 
 const Sidebar: FC<Props> = ({ children, isOpen, onClose }) => {
 
+    const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
+
+    useEffect(() => {
+        if(ref.current){
+            console.log("ref width: ",ref.current.clientWidth);
+        }else{
+            console.log("ref.current is null.");
+        }
+    },[isOpen])
     return (
         <>
         { isOpen ? (
-            <div className="fixed inset-0 overflow-hidden h-full z-50">
+            <div ref={ref} className="fixed inset-0 overflow-hidden h-full z-50">
             <div className="absolute inset-0 overflow-hidden">
                 <div
                     onClick={ onClose }
