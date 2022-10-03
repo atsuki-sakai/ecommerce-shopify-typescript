@@ -11,6 +11,8 @@ interface Props {
 
 const Marquee: FC<Props> = ({children, variant = "primary"}: Props) => {
 
+    const scrollSpead = 20; // 10 ~ 100
+
     const rootClassName = cn(
         style.root,
         {
@@ -21,7 +23,7 @@ const Marquee: FC<Props> = ({children, variant = "primary"}: Props) => {
 
     return (
         <div className={rootClassName}>
-            <FastMarquee gradient={false} speed={30}>
+            <FastMarquee gradient={false} speed={scrollSpead}>
                 <div className={style.container}>
                     { children }
                 </div>
