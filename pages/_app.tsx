@@ -4,8 +4,6 @@ import { Layout } from '@components/common';
 import "@styles/main.css"
 import { UIProvider } from '@components/ui/context';
 
-
-// Layutの型をanyからFCにするとエラーが出るが通る。
 function MyApp({ Component, pageProps }: AppProps & { Component: { Layout: FC } } ) {
   return (
     <UIProvider>

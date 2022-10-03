@@ -1,4 +1,4 @@
-
+import { SelectedOption } from "@framework/shema"
 export interface ProductImage {
     url: string
     altText?: string
@@ -6,8 +6,26 @@ export interface ProductImage {
 
 export interface ProductPrice {
     value: number
-    currencyCode: "USD" | "EUR" | "JPY"
+    currencyCode: "USD" | "EUR" | "JPY" | string
 }
+
+export interface ProductOptionValues {
+    label: string,
+    hexColor?: string
+}
+
+export interface ProductOption {
+    id: string,
+    displayName: string,
+    values: ProductOptionValues[]
+}
+
+export interface ProductVariant {
+    id: string,
+    name: string,
+    options: ProductOption[]
+}
+
 export interface Product {
     id: string
     name: string
@@ -17,4 +35,7 @@ export interface Product {
     path: string
     images: ProductImage[]
     price: ProductPrice
+    options: ProductOption[]
+    variatns: ProductVariant[]
+
 }

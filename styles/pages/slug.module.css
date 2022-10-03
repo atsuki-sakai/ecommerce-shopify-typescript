@@ -1,5 +1,7 @@
 
-
-.container {
-    @apply p-4 md:p-8 h-screen;
+.options {
+    @apply text-base text-gray-500;
+}
+.optionTitle {
+    @apply text-lg font-bold text-black;
 }

@@ -1,4 +1,4 @@
-import { Product as ShopifyProduct, ImageEdge, MoneyV2 } from '../shema';
+import { Product as ShopifyProduct, ImageEdge, MoneyV2, ProductOption, ProductVariantConnection, SelectedOption } from '../shema';
 import { Product, ProductPrice } from '@common/types/product';
 
 const normalizeProductImages = ({edges}: {edges: Array<ImageEdge>}): any => {
@@ -10,6 +10,51 @@ const normarizeProductPrice= ({currencyCode, amount}: MoneyV2) => ({
     currencyCode
 })
 
+const normarizeProductOption = ({ id, name: displayName, values }: ProductOption) =>  {
+    const normarized = {
+        id,
+        displayName,
+        values: values.map((value) => {
+
+            let output: any = { label: value }
+            // 正規表現: Color color Colour colourにマッチする。
+            if(displayName.match(/colou?r/gi)){
+                output = {
+                    ...output,
+                    hexColor: value
+                }
+            }
+            return output;
+        })
+    }
+    console.log(normarized)
+    return normarized;
+}
+
+const normarizedProductVariants = ({ edges }: ProductVariantConnection) => {
+
+    return edges.map(({node}) => {
+        const { id, selectedOptions, sku, title, priceV2, compareAtPriceV2 } = node
+        console.log(node)
+        return {
+            id,
+            sku: sku || id,
+            name: title,
+            price: +priceV2.amount,
+            listPrice: compareAtPriceV2?.amount,
+            requiresShipping: true,
+            options: selectedOptions.map(({name, value}: SelectedOption) => {
+                const option = normarizeProductOption({
+                    id,
+                    name,
+                    values: [value]
+                })
+                return option;
+            })
+        }
+    })
+}
+
 export function normalizeProduct(productNode: ShopifyProduct): Product {
     const {
         id,
@@ -19,6 +64,8 @@ export function normalizeProduct(productNode: ShopifyProduct): Product {
         description,
         images: imageConnection,
         priceRange,
+        options,
+        variants,
         ...rest
     } = productNode;
 
@@ -31,8 +78,11 @@ export function normalizeProduct(productNode: ShopifyProduct): Product {
         path: `/${handle}`,
         slug: handle.replace(/^\/+|\/+$/g,""),
         price: normarizeProductPrice(priceRange.minVariantPrice) as ProductPrice,
+        options: options ?
+            options.filter((o) => o.name !== "Title").map((o) => normarizeProductOption(o)):
+            [],
+        variatns: variants ? normarizedProductVariants(variants) : [],
         ...rest
     }
-    console.log("currencyCode :",priceRange.minVariantPrice.currencyCode);
     return product;
 }
