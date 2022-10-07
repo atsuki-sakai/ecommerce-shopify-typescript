@@ -10,13 +10,11 @@ import { getConfig } from '@framework/api/config'
 import { createProductsPaths } from '@framework/utils'
 import { getProduct, getAllProductsPaths } from '@framework/product'
 import { ProductView } from '@components/product'
-import type { Product } from '@common/types/product'
 
 const ProductSlug = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
-    const p = product as Product;
     return (
         <>
-            { p && <ProductView product={p}/> }
+            { product && <ProductView product={product}/> }
         </>
     )
 }

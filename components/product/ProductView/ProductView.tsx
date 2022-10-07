@@ -1,21 +1,32 @@
 
 import cn from 'classnames'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import s from './ProductView.module.css'
-import { Container } from '@components/ui'
+import { Button, Container } from '@components/ui'
 import Image from "next/image"
 import { Product } from '@common/types/product'
 import ProductSlider from '../ProductSlider'
+import Swatch from '../Swatch'
+
+//Tips - オブジェクトのキーに変数を展開する方法 { [変数]: any } // https://www.white-space.work/assign-variables-to-key-of-object-in-javascript/#:~:text=%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%82%AD%E3%83%BC%E3%82%92%E6%8C%87%E5%AE%9A,%E3%81%A8%E3%80%81%E5%A4%89%E6%95%B0%E5%B1%95%E9%96%8B%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82
 
 interface Props {
     product: Product
 }
 
+type AvailableChoices = "size" | "color" | string
+type Choices = {
+    [ T in AvailableChoices] : string
+}
+
 const ProductView: FC<Props> = ({ product }) => {
-    console.log('image length: ', product.images.length )
+
+    const [ choices, setChoices ] = useState<Choices>({})
+    console.log("choices: ",choices)
+    console.log("product:", product.variants[0])
     return (
         <Container>
-            <div className={cn(s.root, 'fit')}>
+            <div className={cn(s.root, 'fit', 'mb-5')}>
                 <div className={cn(s.productDisplay, 'fit')}>
                 <div className={s.nameBox}>
                     <h1 className={s.name}>{ product.name }</h1>
@@ -28,21 +39,50 @@ const ProductView: FC<Props> = ({ product }) => {
                 <ProductSlider>
                     {
                         product.images.map((image, index) => {
-                            return  <div key={index} className={s.imageContainer}>
-                                        <Image
-                                        className={s.img}
-                                        src={image.url}
-                                        alt={image.altText ?? "Product Image"}
-                                        width={1050}
-                                        height={1050}
-                                        quality="85"
-                                        />
-                                    </div>
+                            return (
+                                <div key={index} className={s.imageContainer}>
+                                    <Image
+                                    className={s.img}
+                                    src={image.url}
+                                    alt={image.altText ?? "Product Image"}
+                                    width={1050}
+                                    height={1050}
+                                    quality="85"
+                                    />
+                                </div>
+                            )
                         })
                     }
                 </ProductSlider>
                 </div>
                 <div className={s.sidebar}>
+                    {product.options.map((option, index) =>
+                        <div key={index}>
+                            <h2 className=''>{ option.displayName }</h2>
+                            <div className='flex items-row py-4'>
+                                {
+                                    option.values.map((value) => {
+                                        const activeChoice = choices[option.displayName.toLowerCase()]
+                                        return (
+                                            <Swatch
+                                                active={value.label === activeChoice}
+                                                key={`${option.id}-${value.label}`}
+                                                label={value.label}
+                                                color={value.label}
+                                                variant={option.displayName}
+                                                onClick={() => {
+                                                    setChoices({
+                                                        ...choices,
+                                                        [option.displayName.toLowerCase()]: value.label.toLowerCase()
+                                                    })
+                                                }}
+                                            />
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+                    )}
                 <section>
                     <div className="pb-4">
                     <h2 className="uppercase font-medium">Color</h2>
@@ -55,13 +95,9 @@ const ProductView: FC<Props> = ({ product }) => {
                     </div>
                 </section>
                 <div>
-                    <button
-                    onClick={() => {}}
-                    aria-label="Add to Cart"
-                    className={s.button}
-                    >
-                    Add to Cart
-                    </button>
+                    <Button className='' onClick={(e) => alert("add to cart.")}>
+                        Add to Cart
+                    </Button>
                 </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { SelectedOption } from "@framework/shema"
+
 export interface ProductImage {
     url: string
     altText?: string
@@ -36,6 +36,6 @@ export interface Product {
     images: ProductImage[]
     price: ProductPrice
     options: ProductOption[]
-    variatns: ProductVariant[]
+    variants: ProductVariant[]
 
 }

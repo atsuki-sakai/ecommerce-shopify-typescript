@@ -22,7 +22,8 @@
       "@framework/*": ["framework/shopify/*"],
       "@components/*": ["components/*"],
       "@assets/*": ["assets/*"],
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@lib/*": ["lib/*"]
     }
   },
   "include": [

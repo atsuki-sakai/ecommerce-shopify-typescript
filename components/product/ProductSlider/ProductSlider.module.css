@@ -29,9 +29,18 @@
     @apply opacity-0 transition duration-150;
 }
 
+.counter {
+    @apply font-bold text-gray-800 text-xl flex items-center;
+}
+
 .root:hover .control {
     @apply opacity-100;
 }
+
+.slideCounter {
+    @apply  text-white font-bold text-lg;
+}
+
 .positionIndicatorsContainer {
     @apply hidden sm:block sm:absolute sm:bottom-6 sm:left-1/2 sm:translate-x-1/2;
 }

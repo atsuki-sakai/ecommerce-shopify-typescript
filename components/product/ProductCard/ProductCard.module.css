@@ -43,13 +43,14 @@
 }
 
 .productTag {
-    @apply absolute top-0 left-0 z-20;
+    @apply absolute left-0 z-20 pt-8 space-y-4;
 
     & span {
         @apply bg-white rounded-br-md;
     }
 
-    & > * {
+    & > * { 
+        display: block;
         font-size: 2rem;
         letter-spacing: 0.4px;
     }
