@@ -7,23 +7,35 @@ import Image from "next/image"
 import { Product } from '@common/types/product'
 import ProductSlider from '../ProductSlider'
 import Swatch from '../Swatch'
+import { useUI } from '@components/ui/context'
+import { Choices, getVariant } from '../helpers'
 
 //Tips - オブジェクトのキーに変数を展開する方法 { [変数]: any } // https://www.white-space.work/assign-variables-to-key-of-object-in-javascript/#:~:text=%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%82%AD%E3%83%BC%E3%82%92%E6%8C%87%E5%AE%9A,%E3%81%A8%E3%80%81%E5%A4%89%E6%95%B0%E5%B1%95%E9%96%8B%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82
 
 interface Props {
     product: Product
 }
-
-type AvailableChoices = "size" | "color" | string
-type Choices = {
-    [ T in AvailableChoices] : string
-}
-
 const ProductView: FC<Props> = ({ product }) => {
 
+    const { openSideBar } = useUI()
     const [ choices, setChoices ] = useState<Choices>({})
-    console.log("choices: ",choices)
-    console.log("product:", product.variants[0])
+    const variant = getVariant(product, choices)
+
+    console.log('variant : ', variant)
+    const addToCart = () => {
+
+        try {
+            const item = {
+                productId: product.id,
+                variantId: variant?.id,
+                variantOptions: variant?.options
+            }
+            alert(JSON.stringify(item, null, 2))
+            openSideBar();
+        }catch(e) {
+
+        }
+    }
     return (
         <Container>
             <div className={cn(s.root, 'fit', 'mb-5')}>
@@ -87,7 +99,7 @@ const ProductView: FC<Props> = ({ product }) => {
                     <div className="pb-4">
                     <h2 className="uppercase font-medium">Color</h2>
                     <div className="flex flex-row py-4">
-                        Variant Options Here!
+                        { JSON.stringify(variant, null, 2)}
                     </div>
                     </div>
                     <div className="pb-14 break-words w-full max-w-xl text-lg">
@@ -95,7 +107,7 @@ const ProductView: FC<Props> = ({ product }) => {
                     </div>
                 </section>
                 <div>
-                    <Button className='' onClick={(e) => alert("add to cart.")}>
+                    <Button className='' onClick={(e) => addToCart()}>
                         Add to Cart
                     </Button>
                 </div>
