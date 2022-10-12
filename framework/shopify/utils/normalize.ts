@@ -27,7 +27,6 @@ const normarizeProductOption = ({ id, name: displayName, values }: ProductOption
             return output;
         })
     }
-    console.log(normarized)
     return normarized;
 }
 
@@ -35,7 +34,6 @@ const normarizedProductVariants = ({ edges }: ProductVariantConnection) => {
 
     return edges.map(({node}) => {
         const { id, selectedOptions, sku, title, priceV2, compareAtPriceV2 } = node
-        console.log(node)
         return {
             id,
             sku: sku || id,

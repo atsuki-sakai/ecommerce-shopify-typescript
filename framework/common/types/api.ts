@@ -1,19 +1,26 @@
+import { ApiHooks } from "./hooks"
 
 export type ApiFetchOptions = {
-    url: string
     query: string
     variables?: Variables
 }
 
-export type Variables = { [key: string]: string | string[] | undefined }
+export type Variables = { [key: string]: string | string[] | any | undefined }
 
 export type ApiFetchResults<T> = {
     data: T
 }
 
 export interface ApiConfig {
-    apiUrl: string
-    fetch<T>(
-        options: ApiFetchOptions
-    ): Promise<ApiFetchResults<T>>
+    fetch<T>(options: ApiFetchOptions): Promise<ApiFetchResults<T>>
+    checkoutCookie: string
+}
+
+
+export type ApiFeacher<T = any> = (options: ApiFetchOptions) => Promise<ApiFetchResults<T>>
+
+export interface ApiProviderContext {
+    hooks: ApiHooks
+    fetcher: ApiFeacher
+    checkoutCookie: string
 }

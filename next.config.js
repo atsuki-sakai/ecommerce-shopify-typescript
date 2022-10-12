@@ -2,11 +2,11 @@
 const { withFrameworkConfig } = require("./framework/common/config")
 const { projectLocale } = require("./framework/common/locale")
 
-const nextConfig = withFrameworkConfig({
+module.exports = withFrameworkConfig({
   reactStrictMode: true,
   swcMinify: true,
   framework: {
-    name: "shopify"
+    name: process.env.NEXT_PUBLIC_FRAMEWORK
   },
   i18n: {
     locales: projectLocale,
@@ -14,4 +14,4 @@ const nextConfig = withFrameworkConfig({
   }
 })
 
-module.exports = nextConfig
+console.log("next.config: ",JSON.stringify(module.exports, null, 2))

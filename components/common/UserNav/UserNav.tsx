@@ -3,10 +3,13 @@ import style from "./UserNav.module.css"
 import Link from 'next/link'
 import { Bag as Cart, Heart } from "@components/icons"
 import { useUI } from '@components/ui/context'
+import { useCart } from '@framework/cart'
 
 const UserNav = () => {
 
     const { openSideBar } = useUI();
+    const { data } = useCart();
+    console.log('userNav data: ', data, "components/common/UserNav/UserNav.tsx")
 
     return (
         <nav>

@@ -1,8 +1,8 @@
 import { FC } from 'react'
-import Link from 'next/link'
 import { Bag, Cross } from '@components/icons'
 import cn from "classnames"
 import { useUI } from '@components/ui/context'
+import { useCart } from "@framework/cart"
 
 const CartSidebar: FC = () => {
     const isEmpty = true
@@ -12,6 +12,8 @@ const CartSidebar: FC = () => {
     )
 
     const { closeSideBar } = useUI()
+    const { data } = useCart()
+    console.log('data: ',data, "/components/cart/CartSideBar.tsx: 17")
     return (
         <div className={rootClass}>
         <header className="px-4 pt-6 pb-4 sm:px-6">
